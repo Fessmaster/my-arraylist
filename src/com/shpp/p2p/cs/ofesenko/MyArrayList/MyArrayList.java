@@ -35,6 +35,11 @@ public class MyArrayList<T> implements Iterable {
         size++;
     }
 
+    public T get(int index){
+        // Додати перевірку індексу!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return (T) array[index];
+    }
+
     private Object[] resizeArray() {
         capacity *= 2;
         Object[] newArray = new Object[capacity];
