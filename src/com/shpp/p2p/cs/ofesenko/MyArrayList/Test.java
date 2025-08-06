@@ -10,18 +10,25 @@ public class Test extends WindowProgram {
     static MyArrayList<GOval> oval;
 
     public static void main(String[] args) {
-        MyArrayList<Integer> numbers = new MyArrayList<>(5);
-        numbers.add(5);
-        numbers.add(4);
-        numbers.add(3);
-        numbers.add(2);
-        numbers.add(1);
-        numbers.print();
-        numbers.deleteLast();
-        System.out.println();
-        numbers.print();
-        System.out.println();
-        System.out.println(numbers.getLast());
+        MyArrayList<String> list = new MyArrayList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.add("C");
+        list.add("C");
+        System.out.println(list.size()); // 3
+
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+        list.delete(4);
+        System.out.println(list);
+
+
+
+
+
+
+
 
 
 
