@@ -1,6 +1,7 @@
 package com.shpp.p2p.cs.ofesenko.MyArrayList;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 public class MyArrayList<T> implements Iterable {
@@ -36,8 +37,33 @@ public class MyArrayList<T> implements Iterable {
     }
 
     public T get(int index){
-        // Додати перевірку індексу!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (index>size) throw new NoSuchElementException ("Element with index "+index+" not exist in list");
         return (T) array[index];
+    }
+
+    public T getFirst(){
+        if (array[0]==null) throw new NoSuchElementException ("Element not exist in list");
+        return (T) array[0];
+    }
+
+    public T getLast(){
+        if (array[size-1]==null) throw new NoSuchElementException ("Element not exist in list");
+        return (T) array[size-1];
+    }
+
+    public void deleteLast(){
+        size--;
+    }
+    // 0 1 2 3 4  length 5
+    // 2,4,6,8,7
+    // Напевно краще зсунути елементи в циклі!
+
+    public void delete(int index){
+        if (index>size) throw new NoSuchElementException ("Element with index "+index+" not exist in list");
+        Object[] newArray = new Object[capacity];
+        System.arraycopy(array, 0, newArray, 0, index);
+        System.arraycopy(array, index+1, newArray, index, array.length);
+        array=newArray;
     }
 
     private Object[] resizeArray() {
@@ -48,7 +74,7 @@ public class MyArrayList<T> implements Iterable {
     }
 
     public void print() {
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (array[i] != null)
                 System.out.print(array[i] + " ");
         }
