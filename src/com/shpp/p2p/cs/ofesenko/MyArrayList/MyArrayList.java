@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class MyArrayList<T> implements Iterable {
+public class MyArrayList<T> implements Iterable<T> {
     private int capacity = 10;
     private int size = 0;
     private Object[] array;
@@ -41,12 +41,12 @@ public class MyArrayList<T> implements Iterable {
     }
 
     public T getFirst() {
-        if (size==0) throw new NoSuchElementException("Element not exist in list");
+        if (size == 0) throw new NoSuchElementException("Element not exist in list");
         return (T) array[0];
     }
 
     public T getLast() {
-        if (size==0) throw new NoSuchElementException("Element not exist in list");
+        if (size == 0) throw new NoSuchElementException("Element not exist in list");
         return (T) array[size - 1];
     }
 
@@ -85,7 +85,37 @@ public class MyArrayList<T> implements Iterable {
      * @return an Iterator.
      */
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator<T> iterator() {
+        return new MyIterator();
     }
+
+    private class MyIterator implements Iterator<T> {
+        private int currentIndex = 0;
+
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * (In other words, returns {@code true} if {@link #next} would
+         * return an element rather than throwing an exception.)
+         *
+         * @return {@code true} if the iteration has more elements
+         */
+        @Override
+        public boolean hasNext() {
+            return currentIndex < size;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iteration has no more elements
+         */
+        @Override
+        public T next() {
+            if (!hasNext())
+                throw new NoSuchElementException("Next element not exist");
+            return (T) (array[currentIndex++]);
+        }
+    }
+
 }
