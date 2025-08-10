@@ -5,17 +5,13 @@ import java.util.NoSuchElementException;
 
 
 public class MyArrayList<T> implements Iterable<T> {
-    private int capacity = 10;
+    private final int DEFAULT_CAPACITY = 5;
+    private int capacity = DEFAULT_CAPACITY;
     private int size = 0;
     private Object[] array;
 
     public MyArrayList() {
         this.array = new Object[capacity];
-    }
-
-    public MyArrayList(int arraySize) {
-        this.array = new Object[arraySize];
-        this.capacity = arraySize;
     }
 
     public int getCapacity() {
@@ -51,6 +47,8 @@ public class MyArrayList<T> implements Iterable<T> {
     }
 
     public void deleteLast() {
+        if (size == 0) throw new NoSuchElementException("Element not exist in list");
+        array[size-1]=null;
         size--;
     }
 
@@ -60,6 +58,7 @@ public class MyArrayList<T> implements Iterable<T> {
         for (int i = index; i < size - 1; i++) {
             array[i] = array[i + 1];
         }
+        array[size-1]=null;
         size--;
     }
 
@@ -70,6 +69,14 @@ public class MyArrayList<T> implements Iterable<T> {
         return newArray;
     }
 
+    public void clear(){
+        for (int i=0; i<array.length; i++){
+            array[i]=null;
+        }
+        size = 0;
+    }
+
+    // ПЕРЕРОБИТИ ________________________________________________________________
     public String toString() {
         String allElements = "";
         for (int i = 0; i < size; i++) {
@@ -86,10 +93,10 @@ public class MyArrayList<T> implements Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        return new MyIterator();
+        return new MyArrayListIterator();
     }
 
-    private class MyIterator implements Iterator<T> {
+    private class MyArrayListIterator implements Iterator<T> {
         private int currentIndex = 0;
 
         /**
@@ -117,5 +124,4 @@ public class MyArrayList<T> implements Iterable<T> {
             return (T) (array[currentIndex++]);
         }
     }
-
 }
