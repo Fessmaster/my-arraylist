@@ -22,18 +22,48 @@ public class MyLinkedList<T> implements Iterable<T> {
         }
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 
     public T getFirst() {
-        if (size == 0) return null;
+        if (size == 0) throw new NoSuchElementException();
         return getItem(first);
     }
 
     public T getLast() {
-        if (size == 0) return null;
+        if (size == 0) throw new NoSuchElementException();
         return getItem(last);
+    }
+
+    public void deleteFirst() {
+        if (size == 0) throw new NoSuchElementException();
+        if (size == 1) {
+            first = null;
+            last = null;
+        } else {
+            first = first.next;
+            first.previous = null;
+        }
+        size--;
+    }
+
+    public void deleteLast() {
+        if (size == 0) throw new NoSuchElementException();
+        if (size==1) {
+            first=null;
+            last=null;
+        } else {
+            last = last.previous;
+            last.next = null;
+        }
+        size--;
+    }
+
+    public void clear(){
+        first = null;
+        last = null;
+        size=0;
     }
 
     private T getItem(Node<T> item) {

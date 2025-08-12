@@ -9,9 +9,9 @@ public class TestMyArrayList {
 
     public static void main(String[] args) {
         MyArrayList<Object> list = new MyArrayList<>();
-        String[] array = {"A", "B", "C", "D", "E", "F", "G", "H"};
+//        String[] array = {"A", "B", "C", "D", "E", "F", "G", "H"};
 //        int[] array = {1,2,3,4,5,6,7,8};
-//        double[] array = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
+        double[] array = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
         testCollection("Test 1. Size in empty array", 0, list.size());
         testException("Test 2. Try to get element in empty array", () -> list.get(0), NoSuchElementException.class);
         list.add(array[0]);
