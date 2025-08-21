@@ -41,6 +41,10 @@ public class TestMyArrayList {
             testCollection("", array[i], element);
             i++;
         }
+
+        System.out.println("TEST");
+        System.out.println();
+        System.out.println(list);
         testCollection("Test 15. Size with 8 elements",8, list.size());
         list.delete(3);
         testCollection("Test 16. Size with after delete element from middle",7, list.size());
